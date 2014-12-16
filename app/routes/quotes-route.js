@@ -4,6 +4,7 @@ module.exports = function(app) {
         quoteController = require("./../controllers/quotes-controller");;
 
     router.get("/", quoteController.displayAll);
+    router.post("/new", quoteController.create);
 
-    app.use("/", router);
+    app.use("/quotes/", router);
 };
