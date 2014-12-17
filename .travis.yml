@@ -8,7 +8,7 @@ services:
 deploy:
   provider: heroku
   api_key:
-    secure: kPGRKQorwbNAb+h1Me3QzkOmzKlEPpLD3efqGPWGrjlIhDKwV4CMgW7HJYtuZ/1khJrD1kgqt9gLl4qI/S28dFwqJ0NhMF7T2gUevbV2MyZBm5ahxK7HmSGLS++XhH6BJdjIlJcQSGOxqk47pBaaAW7DyXPwyp3wtKmBeyh2oaA=
+    secure: OnVG0UHHaOYYWsLByAU1s77AbTGNaTgHlki3O3YK+oAWwucqDianXOJXmqxAeh5BrtJMMYZmFKwbscKyrKOMtjivhEVcyR+pY5Vcdv22J1t4g+BajHzuuHQbuc7vzs4H7tV+oAr06tvlHfIvmfKSkNhHFpIqc1LS6YbYh4EKAWE=
   app:
     master: quote-webservice
     develop: test-quote-webservice
