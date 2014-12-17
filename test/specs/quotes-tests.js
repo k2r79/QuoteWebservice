@@ -6,7 +6,7 @@ describe("Quotes ", function() {
         quoteText: "Test quote text"
     };
 
-    before(function(done) {
+    after(function(done) {
         for (var collectionIndex in mongoose.connection.collections) {
             mongoose.connection.collections[collectionIndex].remove(function() {});
         }
