@@ -14,6 +14,11 @@ require("./app/routes/quotes-route")(app);
 var database = require("./config/database");
 var mongoose = require("mongoose");
 
-mongoose.connect(database.url);
+mongoose.connect(database.url[process.env.NODE_ENV || "development"], function(err) {
+    if (err) {
+        console.error(err);
+        process.exit();
+    }
+});
 
 module.exports = app;

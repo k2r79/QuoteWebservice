@@ -1,16 +1,21 @@
+var mongoose = require("mongoose");
 var Quote = require("./../models/Quote");
+var QuoteModel = mongoose.model("Quote");
 
 exports.displayAll = function(req, res) {
-
+    QuoteModel.getAll(function(quotes) {
+        res.json({
+            quotes: quotes
+        });
+    });
 };
 
 exports.create = function(req, res) {
-    console.log("POST - /quotes/new");
-
     var quote = new Quote();
 
     if (!req.body.quoteText) {
-        res.send({
+        res.status(400);
+        res.json({
             message: "The quote's text is not specified !"
         });
 
@@ -21,12 +26,18 @@ exports.create = function(req, res) {
 
     quote.save(function(error) {
         if (error) {
-            res.send(error);
+            res.status(500);
+            res.json(error);
+
+            return false;
         }
 
+        res.status(201);
         res.json({
             message: "The quote has been created successfully",
-            data: quote
+            newQuote: quote
         });
+
+        return true;
     });
 };
