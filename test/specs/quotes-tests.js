@@ -6,10 +6,14 @@ describe("Quotes ", function() {
         quoteText: "Test quote text"
     };
 
+    before(function(done) {
+        clearDatabase();
+
+        done();
+    });
+
     after(function(done) {
-        for (var collectionIndex in mongoose.connection.collections) {
-            mongoose.connection.collections[collectionIndex].remove(function() {});
-        }
+        clearDatabase();
 
         done();
     });
@@ -68,3 +72,10 @@ describe("Quotes ", function() {
         });
     });
 });
+
+function clearDatabase() {
+    for (var collectionIndex in mongoose.connection.collections) {
+        mongoose.connection.collections[collectionIndex].remove(function () {
+        });
+    }
+}

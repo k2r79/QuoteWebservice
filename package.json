@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "test" : "node test/runMocha.js"
+    "test": "node test/runMocha.js"
   },
   "dependencies": {
     "body-parser": "^1.8.4",
@@ -21,6 +21,7 @@
     "mocha": "^2.0.1",
     "mongoose-mock": "^0.4.0",
     "node-mocks-http": "^1.2.1",
+    "request": "^2.51.0",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
     "superagent": "^0.21.0"
