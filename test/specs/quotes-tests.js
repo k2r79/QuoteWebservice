@@ -88,6 +88,31 @@ describe("Quotes ", function() {
             done(err);
         });
     });
+
+    it("can be deleted", function(done) {
+        request({
+            url: rootUrl + quoteLocation,
+            method: "DELETE",
+            json: true
+        }, function (err, res, body) {
+            expect(res.statusCode).to.equal(204);
+
+            done(err);
+        });
+    });
+
+    it("can be fetched but empty", function(done) {
+        request({
+            url: rootUrl + quoteLocation,
+            method: "GET",
+            json: true
+        }, function (err, res, body) {
+            expect(res.statusCode).to.equal(410);
+
+            done(err);
+        });
+    });
+
 });
 
 function clearDatabase() {

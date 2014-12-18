@@ -53,9 +53,32 @@ exports.display = function(req, res) {
             return false;
         }
 
-        res.json({
-            quote: quote
-        });
+        if (quote) {
+            res.json({
+                quote: quote
+            });
+        } else {
+            res.status(410);
+            res.send();
+        }
+
+        return true;
+    });
+};
+
+exports.remove = function(req, res) {
+    QuoteModel.findOneAndRemove({ _id: req.param("id") }, function(error) {
+        if (error) {
+            console.error(error);
+
+            res.status(500);
+            res.json(error);
+
+            return false;
+        }
+
+        res.status(204);
+        res.send();
 
         return true;
     });
