@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 var request = require("request");
 
 describe("Quotes ", function() {
+    var quoteLocation;
     var quote = {
         quoteText: "Test quote text"
     };
@@ -44,18 +45,34 @@ describe("Quotes ", function() {
             json: true
         }, function (err, res, body) {
             expect(res.statusCode).to.equal(201);
-            expect(body.message).to.equal("The quote has been created successfully");
 
-            expect(body.newQuote.quoteText).to.equal(quote.quoteText);
-            expect(body.newQuote.date).to.not.be.null;
+            expect(res.headers.location).to.not.be.undefined;
 
-            quote = body.newQuote;
+            quoteLocation = res.headers.location;
 
             done(err);
         });
     });
 
-    it("can all be returned", function(done) {
+    it("can be fetched", function(done) {
+        request({
+            url: rootUrl + quoteLocation,
+            method: "GET",
+            json: true
+        }, function (err, res, body) {
+            expect(res.statusCode).to.equal(200);
+
+            for (var fieldIndex in body.quote) {
+                expect(body.quote[fieldIndex]).to.not.be.null;
+            }
+
+            quote = body.quote;
+
+            done(err);
+        });
+    });
+
+    it("can all be fetched", function(done) {
         request({
             url: rootUrl + "/quotes",
             method: "GET",

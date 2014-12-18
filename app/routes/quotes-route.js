@@ -5,6 +5,7 @@ module.exports = function(app) {
 
     router.get("/", quoteController.displayAll);
     router.post("/new", quoteController.create);
+    router.get("/:id", quoteController.display);
 
     app.use("/quotes/", router);
 };

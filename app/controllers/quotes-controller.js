@@ -24,8 +24,10 @@ exports.create = function(req, res) {
 
     quote.quoteText = req.body.quoteText;
 
-    quote.save(function(error) {
+    quote.save(function(error, quote) {
         if (error) {
+            console.error(error);
+
             res.status(500);
             res.json(error);
 
@@ -33,9 +35,26 @@ exports.create = function(req, res) {
         }
 
         res.status(201);
+        res.location("/quotes/" + quote._id);
+        res.send();
+
+        return true;
+    });
+};
+
+exports.display = function(req, res) {
+    QuoteModel.findOne({ _id: req.param("id") }, function(error, quote) {
+        if (error) {
+            console.error(error);
+
+            res.status(500);
+            res.json(error);
+
+            return false;
+        }
+
         res.json({
-            message: "The quote has been created successfully",
-            newQuote: quote
+            quote: quote
         });
 
         return true;
